@@ -3,17 +3,19 @@
     "build": "rimraf dist && webpack",
     "prettify": "eslint --fix src/ tests/ && elm-format --yes src/elm",
     "serve": "webpack-serve --config ./webpack.config.js --port 3000",
-    "test": "jest --bail --coverage --detectOpenHandles --forceExit && elm-test"
+    "test": "jest --bail --coverage --detectOpenHandles --env=jsdom --forceExit && elm-test"
   },
   "jest": {
     "roots": [
       "tests"
     ],
+    "setupTestFrameworkScriptFile": "<rootDir>/mocks/setupTestFramework.js",
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
       "tests/elm-stuff"
     ],
     "testRegex": "\\.js$",
+    "testURL": "http://localhost/",
     "moduleFileExtensions": [
       "js"
     ],

@@ -1,19 +1,30 @@
 // SCSS
 
-require('./style.scss');
+require("./style.scss");
 
 // Elm
 
-const flags = JSON.stringify({
-  message: 'Hello World',
+require("./customElements");
+
+// Create Element
+
+const flags = { message: "Hello World" };
+
+const element = document.createElement("elm-embed");
+element.dataset.flags = JSON.stringify(flags);
+
+document.body.appendChild(element);
+
+// Events
+
+element.addEventListener("setTitle", event => {
+  document.title = event.detail;
 });
 
-const Elm = require('./elm/Main.elm');
+element.sendMessage("Hello !");
 
-Elm.Main.fullscreen(flags);
-
-// For tests
+// For Tests
 
 module.exports = {
-  flags,
+  flags
 };

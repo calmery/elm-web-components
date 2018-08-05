@@ -1,12 +1,14 @@
-module Update exposing (Msg(NoOp), update)
+module Update exposing (Msg(GetMessage), update)
 
 import Model exposing (Model)
 
 
 type Msg
-    = NoOp
+    = GetMessage String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    model ! []
+    case msg of
+        GetMessage message ->
+            message ! []

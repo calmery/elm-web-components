@@ -1,10 +1,10 @@
-const { flags } = require('../src/entry');
+const { flags } = require("../src/entry");
 
-test('Parsing flags as JSON', async () => {
+test("Flags", async () => {
   let isSuccess = true;
 
   try {
-    JSON.parse(flags);
+    JSON.stringify(flags);
   } catch (_) {
     isSuccess = false;
   } finally {

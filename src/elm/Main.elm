@@ -3,8 +3,8 @@ module Main exposing (..)
 import Html exposing (programWithFlags)
 import Flags exposing (decodeFlags)
 import Model exposing (Model)
-import Ports exposing (setTitle)
-import Update exposing (Msg, update)
+import Ports exposing (setTitle, sendMessage)
+import Update exposing (Msg(GetMessage), update)
 import View exposing (view)
 
 
@@ -22,12 +22,12 @@ init value =
                 Err _ ->
                     ""
     in
-        message ! [ setTitle "" ]
+        message ! [ setTitle "Elm Web Components" ]
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    sendMessage GetMessage
 
 
 main : Program String Model Msg
