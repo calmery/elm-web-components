@@ -21,7 +21,13 @@ element.addEventListener("setTitle", event => {
   document.title = event.detail;
 });
 
-element.sendMessage("Hello !");
+addEventListener("DOMContentLoaded", () => {
+  const sendMessageButton = document.getElementById("send-message-button");
+
+  sendMessageButton.addEventListener("click", () => {
+    element.sendMessage("Hello !");
+  });
+});
 
 // For Tests
 
