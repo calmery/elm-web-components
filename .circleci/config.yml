@@ -78,10 +78,28 @@ jobs:
 
       - run: npm run build
 
+      - persist_to_workspace:
+          root: ~/
+          paths: ./*
+
+  deploy:
+    docker:
+      - image: circleci/node:8.11.3
+
+    working_directory: ~/elm
+
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - run: git config --global user.name $GH_NAME
+      - run: git config --global user.email $GH_EMAIL
+      - run: npm run deploy
+
 workflows:
   version: 2
 
-  test-and-build:
+  test-build-and-deploy:
     jobs:
       - setup
 
@@ -92,3 +110,11 @@ workflows:
       - build:
           requires:
             - test
+
+      - deploy:
+          requires:
+            - build
+
+          filters:
+            branches:
+              only: master
